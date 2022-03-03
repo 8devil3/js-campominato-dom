@@ -52,15 +52,17 @@ header > div {
     margin: auto;
     display: flex;
     flex-wrap: wrap;
+    border: 1px #444 solid;
+    box-sizing: content-box;
 }
 
 .container > div {
     font-size: 0.8rem;
-    border: 1px #999 solid;
+    border: 1px #444 solid;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--grey);
+    cursor: pointer;
 }
 
 .desc {
@@ -100,11 +102,9 @@ select:focus-visible{
 }
 
 .false{
-    color: #ff6666;
-    font-weight: 600;
+    background-color: #ff6666;
 }
 
 .true {
-    color: #68d368;
-    font-weight: 600;
+    background-color: #4c965b;
 }
