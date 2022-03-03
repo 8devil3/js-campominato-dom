@@ -24,7 +24,7 @@ const lvEasy = 100; //livello facile
 const lvMedium = 81; //livello medio
 const lvHard = 49; //livello difficile
 
-const bombsNumber = 4; //quantità bombe
+const bombsNumber = 16; //quantità bombe
 
 const widthHeightNumberBox = 40; //misura lato del singolo box dei numeri
 
