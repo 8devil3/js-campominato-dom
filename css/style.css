@@ -55,8 +55,6 @@ main {
 .container {
     display: flex;
     flex-wrap: wrap;
-    border: 1px #444 solid;
-    box-sizing: content-box;
     margin-bottom: 1rem;
 }
 
@@ -67,6 +65,7 @@ main {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border-radius: 50%;
 }
 
 .desc {
@@ -77,6 +76,12 @@ main {
 
 #score {
     text-align: center;
+    height: 4rem;
+}
+
+#score p:first-child {
+    font-weight: 700;
+    color: #ff6666;
 }
 
 button {

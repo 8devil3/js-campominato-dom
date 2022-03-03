@@ -26,7 +26,8 @@ const lvHard = 49; //livello difficile
 
 const bombsNumber = 16; //quantità bombe
 
-const widthHeightNumberBox = 40; //misura lato del singolo box dei numeri
+const widthHeightNumberBox = 40; //misura lato del singolo box dei numeri in px
+const divMargin = 4; //margine del singolo box in px
 
 
 
@@ -60,7 +61,7 @@ function grid(level) { //generazione della griglia e delle bombe, arg -> int
     const bombs = bombsGenerator(level); //generazione bombe
     const arrNOTBomb = [];
     
-    console.log(bombs);
+    //console.log(bombs);
 
     for (let x = 1; x <= level; x++) { //generazione box con i numeri
         divNumberBox = document.createElement('div');
@@ -69,9 +70,10 @@ function grid(level) { //generazione della griglia e delle bombe, arg -> int
 
         divNumberBox.style.width = widthHeightNumberBox + 'px';
         divNumberBox.style.height = widthHeightNumberBox + 'px';
+        divNumberBox.style.margin = divMargin + 'px';
 
-        divContainer.style.width = widthHeightNumberBox * Math.sqrt(level) + 'px';
-        divContainer.style.height = widthHeightNumberBox * Math.sqrt(level) + 'px';
+        divContainer.style.width = (widthHeightNumberBox * Math.sqrt(level) + divMargin * Math.sqrt(level) * 2) + 'px';
+        divContainer.style.height = (widthHeightNumberBox * Math.sqrt(level) + divMargin * Math.sqrt(level) * 2) + 'px';
 
         divNumberBox.addEventListener('click', checkBomb);
         
