@@ -48,12 +48,16 @@ header > div {
     align-items: center;
 }
 
-.container {
+main {
     margin: auto;
+}
+
+.container {
     display: flex;
     flex-wrap: wrap;
     border: 1px #444 solid;
     box-sizing: content-box;
+    margin-bottom: 1rem;
 }
 
 .container > div {
@@ -69,6 +73,10 @@ header > div {
     text-align: left;
     padding: 0.8rem 0.5rem;
     margin-bottom: 1rem;
+}
+
+#score {
+    text-align: center;
 }
 
 button {

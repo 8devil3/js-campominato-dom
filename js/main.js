@@ -18,12 +18,13 @@ const divContainer = document.querySelector(".container");
 const selectLevelInput = document.querySelector("#level");
 const btnPlay = document.querySelector("#play");
 const btnReset = document.querySelector("#reset");
+const scoreMsg = document.querySelector('#score');
 
 const lvEasy = 100; //livello facile
 const lvMedium = 81; //livello medio
 const lvHard = 49; //livello difficile
 
-const bombsNumber = 2; //quantità bombe
+const bombsNumber = 4; //quantità bombe
 
 const widthHeightNumberBox = 40; //misura lato del singolo box dei numeri
 
@@ -42,7 +43,7 @@ function play() { // avvio gioco
 
     divContainer.innerHTML = ""; //reset container
     
-    if (selectLevelInput.value == '1') { //generazione griglia di gioco
+    if (selectLevelInput.value == '1') { //generazione griglia di gioco in base al livello scelto
         grid(lvEasy);
     } else if (selectLevelInput.value == '2') {
         grid(lvMedium);
@@ -53,46 +54,54 @@ function play() { // avvio gioco
 
 
 
-function grid(level) { //generatore della griglia e delle bombe, arg -> int
+function grid(level) { //generzione della griglia e delle bombe, arg -> int
     
     let divNumberBox;
     const bombs = bombsGenerator(level); //generazione bombe
-    const arrTrue = [];
+    const arrNOTBomb = [];
 
     console.log(bombs);
 
     for (let x = 1; x <= level; x++) { //generazione box con i numeri
-        divNumberBox = document.createElement("div");
+        divNumberBox = document.createElement('div');
         divNumberBox.innerHTML = x;
-
         divContainer.append(divNumberBox);
 
-        divNumberBox.style.width = widthHeightNumberBox + "px";
-        divNumberBox.style.height = widthHeightNumberBox + "px";
+        divNumberBox.style.width = widthHeightNumberBox + 'px';
+        divNumberBox.style.height = widthHeightNumberBox + 'px';
 
-        divContainer.style.width = widthHeightNumberBox * Math.sqrt(level) + "px";
-        divContainer.style.height = widthHeightNumberBox * Math.sqrt(level) + "px";
+        divContainer.style.width = widthHeightNumberBox * Math.sqrt(level) + 'px';
+        divContainer.style.height = widthHeightNumberBox * Math.sqrt(level) + 'px';
 
-        divNumberBox.addEventListener('click', function(){ //check delle bombe
+        divNumberBox.addEventListener('click', checkBomb);
+        
+        function checkBomb() { //check delle bombe
             if (!bombs.includes(parseInt(this.innerHTML))) {
-                this.classList.add('true');
 
-                while (!arrTrue.includes(this.innerHTML)) { //conteggio le celle una sola volta, anche se l'utente clicca più volte sulla stessa
-                    arrTrue.push(this.innerHTML);
+                this.classList.add('true');
+                while (!arrNOTBomb.includes(this)) { //conteggio delle celle "non bombe" una sola volta, anche se l'utente clicca più volte sulla stessa
+                    arrNOTBomb.push(this);
                 }
 
-                console.log(arrTrue);
             } else {
-                this.classList.add('false');
-                divContainer.innerHTML = `<p>BOOM!</p><p>Game Over</p><p>Il tuo punteggio è</p><p>${arrTrue.length}</p>`;
+                this.classList.add('false'); //game over e calcolo punteggio
+                scoreMsg.innerHTML = `<p>BOOM!</p><p>Il tuo punteggio è</p><p>${arrNOTBomb.length}</p>`;
+
+                const allCells = document.querySelectorAll('main > .container > div'); //recupero tutte le celle
+
+                for (let i = 0; i < bombs.length; i++) { //rivelo le bombe rimanenti
+                    allCells[bombs[i] - 1].classList.add('false');
+                }
             }
-        });
+        }
     }
 
 }
 
 
-function bombsGenerator(level) { //generazione casuale delle bombe, arg -> int
+
+
+function bombsGenerator(level) { //generatore casuale delle bombe, arg -> int
 
     const arrBombs = [];
     let bomb;
