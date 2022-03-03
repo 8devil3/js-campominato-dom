@@ -121,7 +121,7 @@ function bombsGenerator(level) { //generatore casuale delle bombe, arg -> int
 
         bomb = Math.floor(Math.random() * level) + 1;
         
-        while (arrBombs.includes(bomb)) {
+        while (arrBombs.includes(bomb)) { // mi assicuro che non risultino mai due numeri uguali
             bomb = Math.floor(Math.random() * level) + 1;
         }
 
