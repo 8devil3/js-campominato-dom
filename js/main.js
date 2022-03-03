@@ -31,10 +31,10 @@ const widthHeightNumberBox = 40; //misura lato del singolo box dei numeri
 
 
 btnPlay.addEventListener("click", play);
-
-btnReset.addEventListener('click', function() { //ricarica della pagina
+btnReset.addEventListener('click', function(){
     location.reload();
-})
+});
+
 
 
 
@@ -54,12 +54,12 @@ function play() { // avvio gioco
 
 
 
-function grid(level) { //generzione della griglia e delle bombe, arg -> int
+function grid(level) { //generazione della griglia e delle bombe, arg -> int
     
     let divNumberBox;
     const bombs = bombsGenerator(level); //generazione bombe
     const arrNOTBomb = [];
-
+    
     console.log(bombs);
 
     for (let x = 1; x <= level; x++) { //generazione box con i numeri
@@ -75,28 +75,39 @@ function grid(level) { //generzione della griglia e delle bombe, arg -> int
 
         divNumberBox.addEventListener('click', checkBomb);
         
-        function checkBomb() { //check delle bombe
-            if (!bombs.includes(parseInt(this.innerHTML))) {
+    }
 
-                this.classList.add('true');
-                while (!arrNOTBomb.includes(this)) { //conteggio delle celle "non bombe" una sola volta, anche se l'utente clicca più volte sulla stessa
-                    arrNOTBomb.push(this);
-                }
+    const allCells = document.querySelectorAll('main > .container > div'); //recupero tutte le celle
 
-            } else {
-                this.classList.add('false'); //game over e calcolo punteggio
-                scoreMsg.innerHTML = `<p>BOOM!</p><p>Il tuo punteggio è</p><p>${arrNOTBomb.length}</p>`;
-
-                const allCells = document.querySelectorAll('main > .container > div'); //recupero tutte le celle
-
-                for (let i = 0; i < bombs.length; i++) { //rivelo le bombe rimanenti
-                    allCells[bombs[i] - 1].classList.add('false');
-                }
+    function checkBomb() { //check delle bombe
+        if (!bombs.includes(parseInt(this.innerHTML))) {
+            
+            this.classList.add('true');
+            while (!arrNOTBomb.includes(this)) { //conteggio delle celle "non bombe" una sola volta, anche se l'utente clicca più volte sulla stessa
+                arrNOTBomb.push(this);
             }
+                            
+        } else {
+            this.classList.add('false'); //game over e calcolo punteggio
+            gameOver();
         }
     }
 
+
+    function gameOver() {
+        for (let a = 0; a < allCells.length; a++) {
+            allCells[a].removeEventListener('click', checkBomb);
+        }
+
+        for (let i = 0; i < bombs.length; i++) { //rivelo le bombe rimanenti
+            allCells[bombs[i] - 1].classList.add('false');
+        }
+        
+        scoreMsg.innerHTML = `<p>BOOM!</p><p>Il tuo punteggio è</p><p>${arrNOTBomb.length}</p>`; //stampo il punteggio
+    }       
 }
+
+
 
 
 
