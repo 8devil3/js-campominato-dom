@@ -95,7 +95,7 @@ function grid(level) { //generazione della griglia e delle bombe, arg -> int
 
 
     function gameOver() {
-        for (let a = 0; a < allCells.length; a++) {
+        for (let a = 0; a < allCells.length; a++) { //blocco il click sulle celle
             allCells[a].removeEventListener('click', checkBomb);
         }
 
