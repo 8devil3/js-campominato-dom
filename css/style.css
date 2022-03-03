@@ -84,6 +84,11 @@ main {
     color: #ff6666;
 }
 
+#score p:last-child {
+    font-weight: 700;
+    color: var(--yellow);
+}
+
 button {
     display: block;
     border: 0;
