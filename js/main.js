@@ -15,6 +15,7 @@ BONUS:
 
 
 const divContainer = document.querySelector(".container");
+const divScore = document.querySelector("#score");;
 const selectLevelInput = document.querySelector("#level");
 const btnPlay = document.querySelector("#play");
 const btnReset = document.querySelector("#reset");
@@ -43,6 +44,7 @@ btnReset.addEventListener('click', function(){
 function play() { // avvio gioco
 
     divContainer.innerHTML = ""; //reset container
+    divScore.innerHTML = ""; //reset punteggio
     
     if (selectLevelInput.value == '1') { //generazione griglia di gioco in base al livello scelto
         grid(lvEasy);
@@ -51,6 +53,7 @@ function play() { // avvio gioco
     } else {
         grid(lvHard);
     }
+
 }
 
 
