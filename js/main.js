@@ -53,14 +53,15 @@ function play() { // avvio gioco
 
 
 
-function grid(level) { //generatore della griglia, arg -> int
+function grid(level) { //generatore della griglia e delle bombe, arg -> int
     
     let divNumberBox;
-    let bombs = bombsGenerator(level);
+    const bombs = bombsGenerator(level); //generazione bombe
+    const arrTrue = [];
 
     console.log(bombs);
 
-    for (let x = 1; x <= level; x++) {
+    for (let x = 1; x <= level; x++) { //generazione box con i numeri
         divNumberBox = document.createElement("div");
         divNumberBox.innerHTML = x;
 
@@ -72,11 +73,18 @@ function grid(level) { //generatore della griglia, arg -> int
         divContainer.style.width = widthHeightNumberBox * Math.sqrt(level) + "px";
         divContainer.style.height = widthHeightNumberBox * Math.sqrt(level) + "px";
 
-        divNumberBox.addEventListener('click', function(){
-            if (bombs.includes(parseInt(this.innerHTML))) {
-                this.classList.add('false');
-            } else {
+        divNumberBox.addEventListener('click', function(){ //check delle bombe
+            if (!bombs.includes(parseInt(this.innerHTML))) {
                 this.classList.add('true');
+
+                while (!arrTrue.includes(this.innerHTML)) { //conteggio le celle una sola volta, anche se l'utente clicca più volte sulla stessa
+                    arrTrue.push(this.innerHTML);
+                }
+
+                console.log(arrTrue);
+            } else {
+                this.classList.add('false');
+                divContainer.innerHTML = `<p>BOOM!</p><p>Game Over</p><p>Il tuo punteggio è</p><p>${arrTrue.length}</p>`;
             }
         });
     }
@@ -102,17 +110,3 @@ function bombsGenerator(level) { //generazione casuale delle bombe, arg -> int
 
     return arrBombs;
 }
-
-
-
-
-
-
-// function checkBomb() {
-          
-//     if (arrBombs.includes(parseInt(this.innerHTML))) {
-//         this.classList.add('true');
-//     } else {
-//         this.classList.add('false');
-//     }
-// }
