@@ -79,18 +79,16 @@ function grid(level) { //generazione della griglia e delle bombe, arg -> int
         divContainer.style.height = (widthHeightNumberBox * Math.sqrt(level) + divMargin * Math.sqrt(level) * 2) + 'px';
 
         divNumberBox.addEventListener('click', checkBomb);
-        
     }
 
     const allCells = document.querySelectorAll('main > .container > div'); //recupero tutte le celle
 
     function checkBomb() { //check delle bombe
         if (!bombs.includes(parseInt(this.innerHTML))) {
-            
             this.classList.add('true');
-            while (!arrNOTBomb.includes(this)) { //conteggio delle celle "non bombe" una sola volta, anche se l'utente clicca più volte sulla stessa
-                arrNOTBomb.push(this);
-            }
+
+            removeEventListener('click', checkBomb); //blocco il click su celle già selezionate
+            arrNOTBomb.push(this); //conteggio celle selezionate "non bombe"
                             
         } else {
             this.classList.add('false'); //game over e calcolo punteggio
