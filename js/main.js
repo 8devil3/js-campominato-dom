@@ -86,14 +86,8 @@ function grid(level) { //generazione della griglia e delle bombe, arg -> int
     function checkBomb() { //check delle bombe
         if (!bombs.includes(parseInt(this.innerHTML))) {
             this.classList.add('true');
-<<<<<<< HEAD
-
-            removeEventListener('click', checkBomb); //blocco il click su celle già selezionate
-            arrNOTBomb.push(this); //conteggio celle selezionate "non bombe"
-                            
-=======
             this.removeEventListener('click', checkBomb); //blocco il click su celle già cliccate
->>>>>>> 72e6ef92e68e749e6d5d30887530980e851ddccf
+            arrNOTBomb.push(this); //conteggio celle selezionate "non bombe"
         } else {
             this.classList.add('false'); //game over e calcolo punteggio
             gameOver();
