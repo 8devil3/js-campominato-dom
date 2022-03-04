@@ -79,11 +79,6 @@ main {
     height: 4rem;
 }
 
-#score p:first-child {
-    font-weight: 700;
-    color: #ff6666;
-}
-
 #score p:last-child {
     font-weight: 700;
     color: var(--yellow);
@@ -125,4 +120,14 @@ select:focus-visible{
 
 .true {
     background-color: #4c965b;
+}
+
+.win {
+    color: #4c965b;
+    font-weight: 700;
+}
+
+.lose {
+    color: #ff6666;
+    font-weight: 700;
 }
