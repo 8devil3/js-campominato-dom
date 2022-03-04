@@ -64,7 +64,7 @@ function grid(level) { //generazione della griglia e delle bombe, arg -> int
     const bombs = bombsGenerator(level); //generazione bombe
     const arrNOTBomb = [];
     
-    console.log(bombs);
+    //console.log(bombs);
 
     for (let x = 1; x <= level; x++) { //generazione box con i numeri
         divNumberBox = document.createElement('div');
@@ -88,8 +88,6 @@ function grid(level) { //generazione della griglia e delle bombe, arg -> int
             this.classList.add('true');
             this.removeEventListener('click', checkBomb); //blocco il click su celle già cliccate
             arrNOTBomb.push(this); //conteggio celle selezionate "non bombe"
-
-            console.log('check: ' + (allCells.length - bombs.length) + ' | arrNOTBomb: ' + arrNOTBomb.length);
 
             if (arrNOTBomb.length == (allCells.length - bombs.length)){ //vittoria
                 gameOver();
